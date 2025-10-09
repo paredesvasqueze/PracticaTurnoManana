@@ -1,0 +1,26 @@
+﻿@model Models.Producto
+
+<form id="formProducto">
+    <input type="hidden" id="Id" value="@Model.Id" />
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input class="form-control" id="Nombre" value="@Model.Nombre" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Descripción</label>
+        <input class="form-control" id="Descripcion" value="@Model.Descripcion" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Precio</label>
+        <input class="form-control" id="Precio" type="number" step="0.01" value="@Model.Precio" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Stock</label>
+        <input class="form-control" id="Stock" type="number" value="@Model.Stock" />
+    </div>
+
+    <div class="text-end">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success" onclick="guardarProducto()">Guardar</button>
+    </div>
+</form>

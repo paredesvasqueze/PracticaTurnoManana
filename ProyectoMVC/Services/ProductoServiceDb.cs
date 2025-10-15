@@ -1,4 +1,5 @@
 ﻿using Data;
+using Data;
 using Models;
 using System;
 using System.Collections.Generic;
@@ -8,19 +9,19 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-        public class ProductoServiceDb : IProductoService
+    public class PacienteServiceDb : IPacienteService
+    {
+        private readonly IPacienteRepository _repository;
+
+        public PacienteServiceDb(IPacienteRepository repository)
         {
-            private readonly IProductoRepository _repository;
+            _repository = repository;
+        }
 
-            public ProductoServiceDb(IProductoRepository repository)
-            {
-                _repository = repository;
-            }
-
-            public Task<IEnumerable<Producto>> GetAllAsync() => _repository.GetAllAsync();          
-            public Task<Producto> GetByIdAsync(int id) => _repository.GetByIdAsync(id);
-            public Task AddAsync(Producto producto) => _repository.AddAsync(producto);
-            public Task UpdateAsync(Producto producto) => _repository.UpdateAsync(producto);
-            public Task DeleteAsync(int id) => _repository.DeleteAsync(id);
-        }    
+        public Task<IEnumerable<Paciente>> GetAllAsync() => _repository.GetAllAsync();
+        public Task<Paciente> GetByIdAsync(int id) => _repository.GetByIdAsync(id);
+        public Task AddAsync(Paciente paciente) => _repository.AddAsync(paciente);
+        public Task UpdateAsync(Paciente paciente) => _repository.UpdateAsync(paciente);
+        public Task DeleteAsync(int id) => _repository.DeleteAsync(id);
+    }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    class DepartamentoHospital
+    public class DepartamentoHospital
     {
         [Required(ErrorMessage = "El ID del departamento es obligatorio")]
         public int nIdDepartamento { get; set; }

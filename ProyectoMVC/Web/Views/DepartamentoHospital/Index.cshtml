@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Models.DepartamentoHospital>
+@{
+    ViewData["Title"] = "Listado de Departamentos Hospitalarios";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">@ViewData["Title"]</h2>
+
+    <div class="text-end mb-3">
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Nuevo Departamento
+        </a>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Personal</th>
+                <th>Ubicación</th>
+                <th style="width:180px;">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.nIdDepartamento</td>
+                        <td>@item.cNombre</td>
+                        <td>@item.cDescripcion</td>
+                        <td>@item.nCantidadPersonal</td>
+                        <td>@item.cUbicacion</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.nIdDepartamento" class="btn btn-sm btn-warning">
+                                <i class="bi bi-pencil-square"></i> Editar
+                            </a>
+                            @* El controlador actual no tiene "Details", lo dejamos comentado si no lo necesitas *@
+                            @* <a asp-action="Details" asp-route-id="@item.nIdDepartamento" class="btn btn-sm btn-info">
+                                <i class="bi bi-eye"></i> Ver
+                            </a>
+                            *@
+                            <a asp-action="Delete" asp-route-id="@item.nIdDepartamento" class="btn btn-sm btn-danger">
+                                <i class="bi bi-trash"></i> Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6" class="text-center text-muted">No hay departamentos registrados.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

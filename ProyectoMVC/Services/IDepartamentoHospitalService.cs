@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Data
+namespace Services
 {
-    public interface IDepartamentoHospitalRepository
+    public interface IDepartamentoHospitalService
     {
         Task<IEnumerable<DepartamentoHospital>> GetAllAsync();
         Task<DepartamentoHospital> GetByIdAsync(int id);

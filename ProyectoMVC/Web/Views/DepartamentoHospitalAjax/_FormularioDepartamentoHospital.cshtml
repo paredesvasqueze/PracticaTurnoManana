@@ -1,0 +1,32 @@
+﻿@model Models.DepartamentoHospital
+
+<form id="formDepartamento">
+    @* Campos ocultos para el ID *@
+    <input type="hidden" id="nIdDepartamento" value="@Model.nIdDepartamento" />
+
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input class="form-control" id="cNombre" value="@Model.cNombre" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Descripción</label>
+        <input class="form-control" id="cDescripcion" value="@Model.cDescripcion" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Cantidad Personal</label>
+        <input class="form-control" id="nCantidadPersonal" type="number" value="@Model.nCantidadPersonal" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Ubicación</label>
+        <input class="form-control" id="cUbicacion" value="@Model.cUbicacion" />
+    </div>
+
+    <div class="text-end">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        @* Llamada a la función JS para guardar *@
+        <button type="button" class="btn btn-success" onclick="guardarDepartamento()">Guardar</button>
+    </div>
+</form>

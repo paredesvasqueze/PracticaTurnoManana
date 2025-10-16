@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Models.DepartamentoHospital>
+@{
+    ViewData["Title"] = "Gestión de Departamentos Hospitalarios (AJAX)";
+}
+
+<div class="container mt-4">
+    <h2>@ViewData["Title"]</h2>
+
+    <div class="text-end mb-3">
+        @* Llamada a la función JS con ID 0 para crear *@
+        <button class="btn btn-primary" onclick="abrirFormulario()">
+            <i class="bi bi-plus-circle"></i> Nuevo Departamento
+        </button>
+    </div>
+
+    <table class="table table-bordered" id="tablaDepartamentos">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Personal</th>
+                <th>Ubicación</th>
+                <th style="width:160px;">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var d in Model)
+            {
+                @* Usamos el ID del modelo para la fila *@
+                <tr id="fila-@d.nIdDepartamento">
+                    <td>@d.nIdDepartamento</td>
+                    <td>@d.cNombre</td>
+                    <td>@d.cDescripcion</td>
+                    <td>@d.nCantidadPersonal</td>
+                    <td>@d.cUbicacion</td>
+                    <td>
+                        @* Pasamos el nIdDepartamento a las funciones JS *@
+                        <button class="btn btn-sm btn-warning" onclick="abrirFormulario(@d.nIdDepartamento)">Editar</button>
+                        <button class="btn btn-sm btn-danger" onclick="eliminarDepartamento(@d.nIdDepartamento)">Eliminar</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="modalDepartamento" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Departamento Hospitalario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="contenidoModal">
+                @* Aquí se carga el partial view *@
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+@* Cambiamos la referencia al JS *@
+    <script src="~/js/departamento.js"></script>
+}

@@ -3,8 +3,8 @@ using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddScoped<IProductoRepository, ProductoRepository>();
-builder.Services.AddScoped<IProductoService, ProductoServiceDb>();
+builder.Services.AddScoped<IHistoriaClinicaRepository, HistoriaClinicaRepository>();
+builder.Services.AddScoped<IHistoriaClinicaService, HistoriaClinicaServiceDb>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

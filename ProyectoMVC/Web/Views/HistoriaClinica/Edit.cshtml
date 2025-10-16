@@ -1,5 +1,46 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model Models.HistoriaClinica
+
+<h2>Editar Historia Clínica</h2>
+
+<form asp-action="Edit" method="post">
+    @* Campo oculto para mantener el Id de la historia clínica *@
+    <input type="hidden" asp-for="nIdHistoria" />
+
+    <div class="form-group">
+        <label asp-for="nIdHistoria"></label>
+        <input asp-for="nIdHistoria" class="form-control" />
+        <span asp-validation-for="nIdHistoria" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="dFechaRegistro"></label>
+        <input asp-for="dFechaRegistro" class="form-control" type="date" />
+        <span asp-validation-for="dFechaRegistro" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="cDiagnostico"></label>
+        <textarea asp-for="cDiagnostico" class="form-control"></textarea>
+        <span asp-validation-for="cDiagnostico" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="cTratamiento"></label>
+        <textarea asp-for="cTratamiento" class="form-control"></textarea>
+        <span asp-validation-for="cTratamiento" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="cObservaciones"></label>
+        <textarea asp-for="cObservaciones" class="form-control"></textarea>
+        <span asp-validation-for="cObservaciones" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Guardar Cambios</button>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }
+

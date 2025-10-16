@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Models.HistoriaClinica>
+
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">Listado de Historias Clínicas</h2>
+
+    <div class="text-end mb-3">
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Nueva Historia Clínica
+        </a>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Paciente ID</th>
+                <th>Fecha de Registro</th>
+                <th>Diagnóstico</th>
+                <th>Tratamiento</th>
+                <th>Observaciones</th>
+                <th style="width:180px;">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.nIdHistoria</td>
+                        <td>@item.dFechaRegistro.ToString("dd/MM/yyyy")</td>
+                        <td>@item.cDiagnostico</td>
+                        <td>@item.cTratamiento</td>
+                        <td>@item.cObservaciones</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.nIdHistoria" class="btn btn-sm btn-warning">
+                                <i class="bi bi-pencil-square"></i> Editar
+                            </a>
+                            <a asp-action="Details" asp-route-id="@item.nIdHistoria" class="btn btn-sm btn-info">
+                                <i class="bi bi-eye"></i> Ver
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.nIdHistoria" class="btn btn-sm btn-danger">
+                                <i class="bi bi-trash"></i> Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="7" class="text-center text-muted">No hay historias clínicas registradas.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

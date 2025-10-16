@@ -1,8 +1,11 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Dapper;
+using Microsoft.Extensions.Configuration;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,35 +42,22 @@ namespace Data
             );
         }
 
-        public async Task AddAsync(HistoriaClinica historiaClinica)
+        public async Task AddAsync(HistoriaClinica historiaclinica)
         {
             using var conn = new SqlConnection(_connectionString);
             await conn.ExecuteAsync(
                 "sp_HistoriaClinica_Insert",
-                new
-                {
-                    historiaClinica.PacienteId,
-                    historiaClinica.Fecha,
-                    historiaClinica.Diagnostico,
-                    historiaClinica.Tratamiento
-                },
+                new {historiaclinica.nIdHistoria, historiaclinica.dFechaRegistro, historiaclinica.cDiagnostico, historiaclinica.cTratamiento, historiaclinica.cObservaciones },
                 commandType: CommandType.StoredProcedure
             );
         }
 
-        public async Task UpdateAsync(HistoriaClinica historiaClinica)
+        public async Task UpdateAsync(HistoriaClinica historiaclinica)
         {
             using var conn = new SqlConnection(_connectionString);
             await conn.ExecuteAsync(
                 "sp_HistoriaClinica_Update",
-                new
-                {
-                    historiaClinica.Id,
-                    historiaClinica.PacienteId,
-                    historiaClinica.Fecha,
-                    historiaClinica.Diagnostico,
-                    historiaClinica.Tratamiento
-                },
+                new { historiaclinica.nIdHistoria, historiaclinica.dFechaRegistro, historiaclinica.cDiagnostico, historiaclinica.cTratamiento, historiaclinica.cObservaciones },
                 commandType: CommandType.StoredProcedure
             );
         }

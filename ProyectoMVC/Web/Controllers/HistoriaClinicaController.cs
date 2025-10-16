@@ -4,78 +4,75 @@ using Services;
 
 namespace Web.Controllers
 {
+    public class HistoriaClinicaController : Controller
+    {
+        private readonly IHistoriaClinicaService _service;
 
-        public class HistoriaClinicaController : Controller
+        public HistoriaClinicaController(IHistoriaClinicaService service)
         {
-            private readonly IHistoriaClinicaService _service;
+            _service = service;
+        }
 
-            public HistoriaClinicaController(IHistoriaClinicaService service)
-            {
-                _service = service;
-            }
+        public async Task<IActionResult> Index()
+        {
+            var productos = await _service.GetAllAsync();
+            return View(productos);
+        }
 
-            // GET: HistoriaClinica
-            public async Task<IActionResult> Index()
-            {
-                var historias = await _service.GetAllAsync();
-                return View(historias);
-            }
+        public IActionResult Create()
+        {
+            return View();
+        }
 
-            // GET: HistoriaClinica/Create
-            public IActionResult Create()
-            {
-                return View();
-            }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(HistoriaClinica historiaclinica)
+        {
+            if (!ModelState.IsValid)
+                return View(historiaclinica);
 
-            // POST: HistoriaClinica/Create
-            [HttpPost]
-            [ValidateAntiForgeryToken]
-            public async Task<IActionResult> Create(HistoriaClinica historiaClinica)
-            {
-                if (!ModelState.IsValid)
-                    return View(historiaClinica);
+            await _service.AddAsync(historiaclinica);
+            return RedirectToAction(nameof(Index));
+        }
 
-                await _service.AddAsync(historiaClinica);
-                return RedirectToAction(nameof(Index));
-            }
+        public async Task<IActionResult> Edit(int id)
+        {
+            var historiaclinica = await _service.GetByIdAsync(id);
+            if (historiaclinica == null) return NotFound();
+            return View(historiaclinica);
+        }
 
-            // GET: HistoriaClinica/Edit/5
-            public async Task<IActionResult> Edit(int id)
-            {
-                var historia = await _service.GetByIdAsync(id);
-                if (historia == null) return NotFound();
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(HistoriaClinica historiaclinica)
+        {
+            if (!ModelState.IsValid)
+                return View(historiaclinica);
 
-                return View(historia);
-            }
-
-            // POST: HistoriaClinica/Edit/5
-            [HttpPost]
-            [ValidateAntiForgeryToken]
-            public async Task<IActionResult> Edit(HistoriaClinica historiaClinica)
-            {
-                if (!ModelState.IsValid)
-                    return View(historiaClinica);
-
-                await _service.UpdateAsync(historiaClinica);
-                return RedirectToAction(nameof(Index));
-            }
+            await _service.UpdateAsync(historiaclinica);
+            return RedirectToAction(nameof(Index));
+        }
 
             // GET: HistoriaClinica/Delete/5
-            public async Task<IActionResult> Delete(int id)
-            {
-                var historia = await _service.GetByIdAsync(id);
-                if (historia == null) return NotFound();
+        public async Task<IActionResult> Delete(int id)
+        {
+            /*
 
-                return View(historia);
-            }
+             var producto = await _service.GetByIdAsync(id);
+             if (producto == null) return NotFound();
+             return View(producto);
+            */
+            await _service.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
 
-            // POST: HistoriaClinica/Delete/5
-            [HttpPost, ActionName("Delete")]
-            [ValidateAntiForgeryToken]
-            public async Task<IActionResult> DeleteConfirmed(int id)
-            {
-                await _service.DeleteAsync(id);
-                return RedirectToAction(nameof(Index));
-            }
         }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            await _service.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
+    }
 }

@@ -9,7 +9,7 @@ namespace Models
 {
     public class HistoriaClinica
     {
-        [Required(ErrorMessage = "El Id del paciente es obligatorio")]
+        [Required(ErrorMessage = "El Id de la Hsitoria clinica es obligatorio")]
         public int nIdHistoria { get; set; }  // Id de la Historia Clinica
 
         [Required(ErrorMessage = "El Id del paciente es obligatorio")]

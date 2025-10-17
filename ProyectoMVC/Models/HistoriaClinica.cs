@@ -9,15 +9,15 @@ namespace Models
 {
     public class HistoriaClinica
     {
-        // El Id se maneja automáticamente por la base de datos, no se incluye en el insert
         [Required(ErrorMessage = "El Id del paciente es obligatorio")]
         public int nIdHistoria { get; set; }  // Id del paciente
+
+        [Required(ErrorMessage = "El Id del paciente es obligatorio")]
+        public int nIdPaciente { get; set; }  // Id del paciente
 
         [Required(ErrorMessage = "La fecha de registro es obligatoria")]
         public DateTime dFechaRegistro { get; set; }  // Fecha de registro
 
-        [Required(ErrorMessage = "La fecha es obligatoria")]
-        public DateTime Fecha { get; set; }
 
         [Required(ErrorMessage = "El diagnóstico es obligatorio")]
         [StringLength(500, ErrorMessage = "El diagnóstico no puede tener más de 500 caracteres")]

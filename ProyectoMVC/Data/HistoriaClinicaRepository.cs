@@ -37,39 +37,58 @@ namespace Data
             using var conn = new SqlConnection(_connectionString);
             return await conn.QueryFirstOrDefaultAsync<HistoriaClinica>(
                 "sp_HistoriaClinica_GetById",
-                new { Id = id },
+                new { nIdHistoria = id },   // 👈 nombre correcto
                 commandType: CommandType.StoredProcedure
             );
         }
+
 
         public async Task AddAsync(HistoriaClinica historiaclinica)
         {
             using var conn = new SqlConnection(_connectionString);
             await conn.ExecuteAsync(
                 "sp_HistoriaClinica_Insert",
-                new {historiaclinica.nIdHistoria, historiaclinica.dFechaRegistro, historiaclinica.cDiagnostico, historiaclinica.cTratamiento, historiaclinica.cObservaciones },
+                new
+                {
+                    historiaclinica.nIdPaciente,      // 👈 este faltaba
+                    historiaclinica.dFechaRegistro,
+                    historiaclinica.cDiagnostico,
+                    historiaclinica.cTratamiento,
+                    historiaclinica.cObservaciones
+                },
                 commandType: CommandType.StoredProcedure
             );
         }
+
 
         public async Task UpdateAsync(HistoriaClinica historiaclinica)
         {
             using var conn = new SqlConnection(_connectionString);
             await conn.ExecuteAsync(
                 "sp_HistoriaClinica_Update",
-                new { historiaclinica.nIdHistoria, historiaclinica.dFechaRegistro, historiaclinica.cDiagnostico, historiaclinica.cTratamiento, historiaclinica.cObservaciones },
+                new
+                {
+                    historiaclinica.nIdHistoria,
+                    historiaclinica.nIdPaciente,      // 👈 este faltaba
+                    historiaclinica.dFechaRegistro,
+                    historiaclinica.cDiagnostico,
+                    historiaclinica.cTratamiento,
+                    historiaclinica.cObservaciones
+                },
                 commandType: CommandType.StoredProcedure
             );
         }
+
 
         public async Task DeleteAsync(int id)
         {
             using var conn = new SqlConnection(_connectionString);
             await conn.ExecuteAsync(
                 "sp_HistoriaClinica_Delete",
-                new { Id = id },
+                new { nIdHistoria = id },  // 👈 nombre correcto
                 commandType: CommandType.StoredProcedure
             );
         }
+
     }
 }

@@ -28,6 +28,7 @@
                 {
                     <tr>
                         <td>@item.nIdHistoria</td>
+                        <td>@item.nIdPaciente</td>
                         <td>@item.dFechaRegistro.ToString("dd/MM/yyyy")</td>
                         <td>@item.cDiagnostico</td>
                         <td>@item.cTratamiento</td>
@@ -36,12 +37,10 @@
                             <a asp-action="Edit" asp-route-id="@item.nIdHistoria" class="btn btn-sm btn-warning">
                                 <i class="bi bi-pencil-square"></i> Editar
                             </a>
-                            <a asp-action="Details" asp-route-id="@item.nIdHistoria" class="btn btn-sm btn-info">
-                                <i class="bi bi-eye"></i> Ver
-                            </a>
                             <a asp-action="Delete" asp-route-id="@item.nIdHistoria" class="btn btn-sm btn-danger">
                                 <i class="bi bi-trash"></i> Eliminar
                             </a>
+
                         </td>
                     </tr>
                 }

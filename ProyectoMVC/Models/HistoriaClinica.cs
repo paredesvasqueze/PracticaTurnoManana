@@ -10,10 +10,10 @@ namespace Models
     public class HistoriaClinica
     {
         [Required(ErrorMessage = "El Id del paciente es obligatorio")]
-        public int nIdHistoria { get; set; }  // Id del paciente
+        public int nIdHistoria { get; set; }  // Id de la Historia Clinica
 
         [Required(ErrorMessage = "El Id del paciente es obligatorio")]
-        public int nIdPaciente { get; set; }  // Id del paciente
+        public int nIdPaciente { get; set; }  // Id del pacientee
 
         [Required(ErrorMessage = "La fecha de registro es obligatoria")]
         public DateTime dFechaRegistro { get; set; }  // Fecha de registro

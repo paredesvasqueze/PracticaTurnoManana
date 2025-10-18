@@ -17,7 +17,8 @@ namespace Services
                 _repository = repository;
             }
 
-            public Task<IEnumerable<Producto>> GetAllAsync() => _repository.GetAllAsync();          
+            public Task<IEnumerable<Producto>> GetAllAsync() => _repository.GetAllAsync();
+            public Task<IEnumerable<Categoria>> GetCategoriaAllAsync() => _repository.GetCategoriaAllAsync();
             public Task<Producto> GetByIdAsync(int id) => _repository.GetByIdAsync(id);
             public Task AddAsync(Producto producto) => _repository.AddAsync(producto);
             public Task UpdateAsync(Producto producto) => _repository.UpdateAsync(producto);

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Models;
 using Services;
 
@@ -19,8 +20,18 @@ namespace Web.Controllers
             return View(productos);
         }
 
-        public IActionResult Create()
+        public async Task <IActionResult> Create()
         {
+            var categorias = await _service.GetCategoriaAllAsync();
+
+            ViewBag.Categorias = categorias
+            .Select(c => new SelectListItem
+            {
+                Value = c.CategoriaId.ToString(),
+                Text = c.Nombre
+            })
+            .ToList();
+
             return View();
         }
 
@@ -28,6 +39,7 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Producto producto)
         {
+            producto.cNombreCategoria = "aa";
             if (!ModelState.IsValid)
                 return View(producto);
 

@@ -20,8 +20,9 @@
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Precio</th>
-                <th>Categoría</th>
+                <th>Descripcion</th>
                 <th>Stock</th>
+                <th>Categoria</th>
                 <th style="width:180px;">Acciones</th>
             </tr>
         </thead>
@@ -36,6 +37,7 @@
                         <td>@item.Precio.ToString("C")</td>
                         <td>@item.Descripcion</td>
                         <td>@item.Stock</td>
+                        <td>@item.cNombreCategoria</td>
                         <td>
                             <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">
                                 <i class="bi bi-pencil-square"></i> Editar

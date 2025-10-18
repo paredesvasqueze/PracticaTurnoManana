@@ -10,6 +10,8 @@ namespace Data
     public interface IProductoRepository
     {
         Task<IEnumerable<Producto>> GetAllAsync();
+
+        Task<IEnumerable<Categoria>> GetCategoriaAllAsync();
         Task<Producto> GetByIdAsync(int id);
         Task AddAsync(Producto producto);
         Task UpdateAsync(Producto producto);

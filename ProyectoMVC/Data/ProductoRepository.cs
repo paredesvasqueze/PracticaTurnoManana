@@ -29,6 +29,15 @@ namespace Data
             );
         }
 
+        public async Task<IEnumerable<Categoria>> GetCategoriaAllAsync()
+        {
+            using var conn = new SqlConnection(_connectionString);
+            return await conn.QueryAsync<Categoria>(
+                "sp_Categoria_GetAll",
+                commandType: CommandType.StoredProcedure
+            );
+        }
+
         public async Task<Producto> GetByIdAsync(int id)
         {
             using var conn = new SqlConnection(_connectionString);
@@ -44,7 +53,7 @@ namespace Data
             using var conn = new SqlConnection(_connectionString);
             await conn.ExecuteAsync(
                 "sp_Producto_Insert",
-                new { producto.Nombre, producto.Descripcion, producto.Precio, producto.Stock },
+                new { producto.Nombre, producto.Descripcion, producto.Precio, producto.Stock, producto.CategoriaId },
                 commandType: CommandType.StoredProcedure
             );
         }

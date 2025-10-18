@@ -4,35 +4,35 @@ using Services;
 
 namespace Web.Controllers
 {
-    public class MedicoAjaxController : Controller
+    public class ProductoAjaxController : Controller
     {
-        private readonly IMedicoService _service;
+        private readonly IProductoService _service;
 
-        public MedicoAjaxController(IMedicoService service)
+        public ProductoAjaxController(IProductoService service)
         {
             _service = service;
         }
 
         public async Task<IActionResult> Index()
         {
-            var Medicos = await _service.GetAllAsync();
-            return View(Medicos);
+            var productos = await _service.GetAllAsync();
+            return View(productos);
         }
 
         [HttpGet]
         public IActionResult Form(int? id)
         {
             if (id == null || id == 0)
-                return PartialView("_FormularioMedico", new Medico());
+                return PartialView("_FormularioProducto", new Producto());
             else
             {
-                var Medico = _service.GetByIdAsync(id.Value).Result;
-                return PartialView("_FormularioMedico", Medico);
+                var producto = _service.GetByIdAsync(id.Value).Result;
+                return PartialView("_FormularioProducto", producto);
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> Guardar([FromBody] Medico Medico)
+        public async Task<IActionResult> Guardar([FromBody] Producto producto)
         {
             try
             {
@@ -56,10 +56,10 @@ namespace Web.Controllers
 
 
 
-                if (Medico.nIdMedico == 0)
-                    await _service.AddAsync(Medico);
+                if (producto.Id == 0)
+                    await _service.AddAsync(producto);
                 else
-                    await _service.UpdateAsync(Medico);
+                    await _service.UpdateAsync(producto);
 
                 return Json(new { success = true });
             }

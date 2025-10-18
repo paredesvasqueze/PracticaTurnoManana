@@ -1,47 +1,52 @@
-﻿@model IEnumerable<Models.Producto>
+﻿@model IEnumerable<Models.Medico>
 
 @{
-    ViewData["Title"] = "Gestión de Productos";
+    ViewData["Title"] = "Gestión de Médicos";
 }
 
 <div class="container mt-4">
     <h2 class="mb-4 text-center">@ViewData["Title"]</h2>
 
     <div class="text-end mb-3">
-        <button class="btn btn-primary shadow-sm" onclick="abrirFormulario()">
-            <i class="bi bi-plus-circle"></i> Nuevo Producto
-        </button>
+        <a asp-action="Create" class="btn btn-primary shadow-sm">
+            <i class="bi bi-plus-circle"></i> Nuevo Médico
+        </a>
     </div>
 
-    <table class="table table-bordered table-striped table-hover align-middle shadow-sm" id="tablaProductos">
+    <table class="table table-bordered table-striped table-hover align-middle shadow-sm">
         <thead class="table-dark text-center">
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Precio</th>
-                <th>Stock</th>
+                <th>Apellido</th>
+                <th>Especialidad</th>
+                <th>Teléfono</th>
+                <th>Correo</th>
                 <th style="width:180px;">Acciones</th>
             </tr>
         </thead>
         <tbody>
             @if (Model != null && Model.Any())
             {
-                foreach (var p in Model)
+                foreach (var medico in Model)
                 {
-                    <tr id="fila-@p.Id">
-                        <td class="text-center">@p.Id</td>
-                        <td>@p.Nombre</td>
-                        <td>@p.Descripcion</td>
-                        <td>@p.Precio.ToString("C")</td>
-                        <td class="text-center">@p.Stock</td>
+                    <tr>
+                        <td class="text-center">@medico.nIdMedico</td>
+                        <td>@medico.cNombre</td>
+                        <td>@medico.cApellido</td>
+                        <td>@medico.cEspecialidad</td>
+                        <td>@medico.cTelefono</td>
+                        <td>@medico.cCorreo</td>
                         <td class="text-center">
-                            <button class="btn btn-sm btn-warning me-1" onclick="abrirFormulario(@p.Id)">
+                            <a asp-action="Edit" asp-route-id="@medico.nIdMedico" class="btn btn-sm btn-warning me-1">
                                 <i class="bi bi-pencil-square"></i> Editar
-                            </button>
-                            <button class="btn btn-sm btn-danger" onclick="eliminarProducto(@p.Id)">
+                            </a>
+                            <a asp-action="Details" asp-route-id="@medico.nIdMedico" class="btn btn-sm btn-info me-1">
+                                <i class="bi bi-eye"></i> Ver
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@medico.nIdMedico" class="btn btn-sm btn-danger">
                                 <i class="bi bi-trash"></i> Eliminar
-                            </button>
+                            </a>
                         </td>
                     </tr>
                 }
@@ -49,32 +54,11 @@
             else
             {
                 <tr>
-                    <td colspan="6" class="text-center text-muted py-3">
-                        <i class="bi bi-box-seam"></i> No hay productos registrados.
+                    <td colspan="7" class="text-center text-muted py-3">
+                        <i class="bi bi-person-bounding-box"></i> No hay médicos registrados.
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
-
-<!-- Modal -->
-<div class="modal fade" id="modalProducto" tabindex="-1" aria-labelledby="modalProductoLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content shadow-lg">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="modalProductoLabel">
-                    <i class="bi bi-box"></i> Producto
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-            </div>
-            <div class="modal-body" id="contenidoModal">
-                <!-- El contenido del formulario se cargará dinámicamente -->
-            </div>
-        </div>
-    </div>
-</div>
-
-@section Scripts {
-    <script src="~/js/producto.js"></script>
-}

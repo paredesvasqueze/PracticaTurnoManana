@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Models.Medicamento>
+
+@{
+    ViewData["Title"] = "Gestión de Medicamentos";
+}
+
+<div class="container mt-4">
+    <h2>@ViewData["Title"]</h2>
+
+    <div class="text-end mb-3">
+        <button class="btn btn-primary" onclick="abrirFormulario()">
+            <i class="bi bi-plus-circle"></i> Nuevo Medicamento
+        </button>
+    </div>
+
+    <table class="table table-bordered" id="tablaMedicamentos">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Presentación</th>
+                <th>Precio Unitario</th>
+                <th>Stock</th>
+                <th style="width:160px;">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model)
+            {
+                <tr id="fila-@m.nIdMedicamento">
+                    <td>@m.nIdMedicamento</td>
+                    <td>@m.cNombre</td>
+                    <td>@m.cDescripcion</td>
+                    <td>@m.cPresentacion</td>
+                    <td>@m.nPrecioUnitario.ToString("C")</td>
+                    <td>@m.nStock</td>
+                    <td>
+                        <button class="btn btn-sm btn-warning" onclick="abrirFormulario(@m.nIdMedicamento)">Editar</button>
+                        <button class="btn btn-sm btn-danger" onclick="eliminarMedicamento(@m.nIdMedicamento)">Eliminar</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalMedicamento" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Medicamento</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="contenidoModal">
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/medicamento.js"></script>
+}

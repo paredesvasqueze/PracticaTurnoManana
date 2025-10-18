@@ -1,6 +1,6 @@
-﻿@model IEnumerable<Models.Producto>
+﻿@model IEnumerable<Models.Medicamento>
 @*
-   ViewData["Title"] = "Listado de Productos";
+   ViewData["Title"] = "Listado de Medicamentos";
 *@
 @{
 }
@@ -10,7 +10,7 @@
 
     <div class="text-end mb-3">
         <a asp-action="Create" class="btn btn-primary">
-            <i class="bi bi-plus-circle"></i> Nuevo Producto
+            <i class="bi bi-plus-circle"></i> Nuevo Medicamento
         </a>
     </div>
 
@@ -19,11 +19,9 @@
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
-                <th>Precio</th>
-                <th>Descripcion</th>
+                <th>Precio Unitario</th>
+                <th>Presentación</th>
                 <th>Stock</th>
-                <th>Categoria</th>
-              
                 <th style="width:180px;">Acciones</th>
             </tr>
         </thead>
@@ -33,20 +31,20 @@
                 foreach (var item in Model)
                 {
                     <tr>
-                        <td>@item.Id</td>
-                        <td>@item.Nombre</td>
-                        <td>@item.Precio.ToString("C")</td>
-                        <td>@item.Descripcion</td>
-                        <td>@item.Stock</td>
-                        <td>@item.cNombreCategoria</td>
+                        <td>@item.nIdMedicamento</td>
+                        <td>@item.cNombre</td>
+                        <td>@item.nPrecioUnitario.ToString("C")</td>
+                        <td>@item.cPresentacion</td>
+                        <td>@item.nStock</td>
+
                         <td>
-                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">
+                            <a asp-action="Edit" asp-route-id="@item.nIdMedicamento" class="btn btn-sm btn-warning">
                                 <i class="bi bi-pencil-square"></i> Editar
                             </a>
-                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">
+                            <a asp-action="Details" asp-route-id="@item.nIdMedicamento" class="btn btn-sm btn-info">
                                 <i class="bi bi-eye"></i> Ver
                             </a>
-                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">
+                            <a asp-action="Delete" asp-route-id="@item.nIdMedicamento" class="btn btn-sm btn-danger">
                                 <i class="bi bi-trash"></i> Eliminar
                             </a>
                         </td>
@@ -56,12 +54,9 @@
             else
             {
                 <tr>
-                    <td colspan="6" class="text-center text-muted">No hay productos registrados.</td>
+                    <td colspan="6" class="text-center text-muted">No hay medicamentos registrados.</td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
-
-
-

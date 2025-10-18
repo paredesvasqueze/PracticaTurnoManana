@@ -8,5 +8,7 @@ namespace Data
 {
     internal class Ruiz
     {
+        // Esta es mi clase
+
     }
 }

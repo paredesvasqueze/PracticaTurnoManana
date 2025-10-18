@@ -39,7 +39,7 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Producto producto)
         {
-            producto.cNombreCategoria = "aa";
+
             if (!ModelState.IsValid)
                 return View(producto);
 
@@ -50,7 +50,18 @@ namespace Web.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var producto = await _service.GetByIdAsync(id);
+            var categorias = await _service.GetCategoriaAllAsync();
+
             if (producto == null) return NotFound();
+
+            ViewBag.Categorias = categorias
+            .Select(c => new SelectListItem
+            {
+                Value = c.CategoriaId.ToString(),
+                Text = c.Nombre
+            })
+            .ToList();
+
             return View(producto);
         }
 

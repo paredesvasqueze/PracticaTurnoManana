@@ -63,7 +63,7 @@ namespace Data
             using var conn = new SqlConnection(_connectionString);
             await conn.ExecuteAsync(
                 "sp_Producto_Update",
-                new { producto.Id, producto.Nombre, producto.Descripcion, producto.Precio, producto.Stock },
+                new { producto.Id, producto.Nombre, producto.Descripcion, producto.Precio, producto.Stock, producto.CategoriaId },
                 commandType: CommandType.StoredProcedure
             );
         }

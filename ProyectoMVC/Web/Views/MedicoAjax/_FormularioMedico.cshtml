@@ -1,0 +1,39 @@
+﻿@*
+     @model Models.Medico
+
+*@
+@{
+    @model Models.Medico
+
+    <form id="formMedico">
+        <input type="hidden" id="Id" value="@Model.nIdMedico" />
+
+        <div class="mb-3">
+            <label class="form-label">Nombre Completo</label>
+            <input class="form-control" id="Nombre" value="@Model.cNombre" placeholder="Ingrese el nombre del médico" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Especialidad</label>
+            <input class="form-control" id="Especialidad" value="@Model.cEspecialidad" placeholder="Ejemplo: Pediatría, Cardiología" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Teléfono</label>
+            <input class="form-control" id="Telefono" value="@Model.cTelefono" placeholder="Ingrese el número de contacto" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Correo Electrónico</label>
+            <input class="form-control" id="Correo" type="email" value="@Model.cCorreo" placeholder="medico@ejemplo.com" />
+        </div>
+
+        <div class="text-end">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-success" onclick="guardarMedico()">
+                <i class="bi bi-save"></i> Guardar
+            </button>
+        </div>
+    </form>
+
+}

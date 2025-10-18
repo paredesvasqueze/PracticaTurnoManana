@@ -1,0 +1,55 @@
+﻿@model Models.Medico
+
+@{
+    ViewData["Title"] = "Editar Médico";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Edit" method="post">
+    @* Campo oculto para mantener el Id del médico *@
+    <input type="hidden" asp-for="nIdMedico" />
+
+    <div class="form-group mb-3">
+        <label asp-for="cCMP"></label>
+        <input asp-for="cCMP" class="form-control" />
+        <span asp-validation-for="cCMP" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="cNombre"></label>
+        <input asp-for="cNombre" class="form-control" />
+        <span asp-validation-for="cNombre" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="cApellido"></label>
+        <input asp-for="cApellido" class="form-control" />
+        <span asp-validation-for="cApellido" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="cEspecialidad"></label>
+        <input asp-for="cEspecialidad" class="form-control" />
+        <span asp-validation-for="cEspecialidad" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="cTelefono"></label>
+        <input asp-for="cTelefono" class="form-control" />
+        <span asp-validation-for="cTelefono" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="cCorreo"></label>
+        <input asp-for="cCorreo" class="form-control" />
+        <span asp-validation-for="cCorreo" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Guardar Cambios</button>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

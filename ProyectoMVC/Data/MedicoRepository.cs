@@ -46,12 +46,12 @@ namespace Data
                 "sp_InsertarMedico",
                 new
                 {
-                    cCMP = medico.CMP,
-                    cNombre = medico.Nombre,
-                    cApellido = medico.Apellido,
-                    cEspecialidad = medico.Especialidad,
-                    cTelefono = medico.Telefono,
-                    cCorreo = medico.Correo
+                    cCMP = medico.cCMP,
+                    cNombre = medico.cNombre,
+                    cApellido = medico.cApellido,
+                    cEspecialidad = medico.cEspecialidad,
+                    cTelefono = medico.cTelefono,
+                    cCorreo = medico.cCorreo
                 },
                 commandType: CommandType.StoredProcedure
             );
@@ -65,13 +65,13 @@ namespace Data
                 "sp_ActualizarMedico",
                 new
                 {
-                    nIdMedico = medico.Id,
-                    cCMP = medico.CMP,
-                    cNombre = medico.Nombre,
-                    cApellido = medico.Apellido,
-                    cEspecialidad = medico.Especialidad,
-                    cTelefono = medico.Telefono,
-                    cCorreo = medico.Correo
+                    nIdMedico = medico.nIdMedico,
+                    cCMP = medico.cCMP,
+                    cNombre = medico.cNombre,
+                    cApellido = medico.cApellido,
+                    cEspecialidad = medico.cEspecialidad,
+                    cTelefono = medico.cTelefono,
+                    cCorreo = medico.cCorreo
                 },
                 commandType: CommandType.StoredProcedure
             );

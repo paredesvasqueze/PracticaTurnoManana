@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Models.CitaMedica>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Gestión de Citas Médicas</h2>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNuevaCita">
+        Nueva Cita
+    </button>
+</div>
+
+<table class="table table-striped align-middle text-center">
+    <thead class="table-dark">
+        <tr>
+            <th>ID Cita</th>
+            <th>ID Paciente</th>
+            <th>ID Médico</th>
+            <th>Fecha</th>
+            <th>Motivo</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.nIdCita</td>
+                <td>@c.nIdPaciente</td>
+                <td>@c.nIdMedico</td>
+                <td>@c.dFechaCita.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@c.cMotivo</td>
+                <td>@c.cEstado</td>
+                <td>
+                    <div class="d-flex justify-content-center gap-2">
+                        <a asp-action="Edit" asp-route-id="@c.nIdCita" class="btn btn-warning btn-sm text-dark fw-bold px-3">
+                            Editar
+                        </a>
+
+                        <form asp-action="Delete" asp-route-id="@c.nIdCita" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm fw-bold px-3"
+                                    onclick="return confirm('¿Seguro que deseas eliminar esta cita médica?');">
+                                Eliminar
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="modal fade" id="modalNuevaCita" tabindex="-1" aria-labelledby="modalNuevaCitaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form asp-action="Create" method="post">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="modalNuevaCitaLabel">Registrar Nueva Cita</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">ID Paciente</label>
+                        <input type="number" class="form-control" name="nIdPaciente" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">ID Médico</label>
+                        <input type="number" class="form-control" name="nIdMedico" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Fecha de Cita</label>
+                        <input type="datetime-local" class="form-control" name="dFechaCita" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Motivo</label>
+                        <input type="text" class="form-control" name="cMotivo" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Estado</label>
+                        <select class="form-select" name="cEstado" required>
+                            <option value="Pendiente">Pendiente</option>
+                            <option value="Atendida">Atendida</option>
+                            <option value="Cancelada">Cancelada</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

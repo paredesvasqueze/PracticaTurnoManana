@@ -1,0 +1,55 @@
+﻿@model Models.CitaMedica
+
+@{
+    ViewData["Title"] = "Registrar Cita Médica";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-controller="CitaMedica" asp-action="Create" method="post" class="mt-4">
+    @Html.AntiForgeryToken()
+    <div class="form-group mb-3">
+        <label asp-for="nIdPaciente" class="form-label">ID del Paciente</label>
+        <input asp-for="nIdPaciente" class="form-control" />
+        <span asp-validation-for="nIdPaciente" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="nIdMedico" class="form-label">ID del Médico</label>
+        <input asp-for="nIdMedico" class="form-control" />
+        <span asp-validation-for="nIdMedico" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="dFechaCita" class="form-label">Fecha de la Cita</label>
+        <input asp-for="dFechaCita" type="date" class="form-control" />
+        <span asp-validation-for="dFechaCita" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="cMotivo" class="form-label">Motivo</label>
+        <input asp-for="cMotivo" class="form-control" />
+        <span asp-validation-for="cMotivo" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-4">
+        <label asp-for="cEstado" class="form-label">Estado</label>
+        <select asp-for="cEstado" class="form-control">
+            <option value="">Seleccione...</option>
+            <option value="Pendiente">Pendiente</option>
+            <option value="Atendido">Atendido</option>
+            <option value="Cancelado">Cancelado</option>
+        </select>
+        <span asp-validation-for="cEstado" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Volver al Listado</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

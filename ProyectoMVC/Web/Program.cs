@@ -1,29 +1,31 @@
-using Data;
+﻿using Data;
 using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Servicios existentes
 builder.Services.AddScoped<IProductoRepository, ProductoRepository>();
 builder.Services.AddScoped<IProductoService, ProductoServiceDb>();
 
-// Add services to the container.
+// Servicio y repositorio para Cita Médica
+builder.Services.AddScoped<ICitaMedicaRepository, CitaMedicaRepository>();
+builder.Services.AddScoped<ICitaMedicaServiceDb, CitaMedicaService>();
+
+// Agregar controladores con vistas
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configuración del pipeline HTTP
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
 app.UseRouting();
-
 app.UseAuthorization();
-
 app.MapStaticAssets();
 
 app.MapControllerRoute(
@@ -31,5 +33,5 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
-
 app.Run();
+

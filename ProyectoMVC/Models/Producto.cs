@@ -9,10 +9,10 @@ namespace Models
 {
     public class Producto
     {
-        [Required(ErrorMessage = "El Id es obligatorio") ]
+        [Required(ErrorMessage = "El Id es obligatorio")]
         public int Id { get; set; }
 
-        
+
         [Required(ErrorMessage = "El nombre es obligatorio")]
         [StringLength(100, ErrorMessage = "El nombre no puede tener más de 100 caracteres")]
         public string Nombre { get; set; }
@@ -26,6 +26,11 @@ namespace Models
 
         [Range(0, 1000, ErrorMessage = "El stock debe ser al menos 0")]
         public int Stock { get; set; }
+
+        [Required(ErrorMessage = "Debe Seleccionar una Categoria")]
+        public int CategoriaID { get; set; }
+        public string cNombreCategoria { get; set; }
     }
 
 }
+
